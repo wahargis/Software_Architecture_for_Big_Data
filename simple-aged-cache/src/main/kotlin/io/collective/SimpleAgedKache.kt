@@ -25,11 +25,22 @@ class SimpleAgedKache(val cacheClock: Clock = Clock.systemUTC()) {
         // Clean up expired entries
         removeExpiredEntries()
 
+        // disallow key-value pair assignment of null values
+        if (value == null){
+            throw IllegalArgumentException("value cannot be null");
+        }
+        // disallow key-value pair assignment where key is null
+        if (key == null){
+            throw IllegalArgumentException("key cannot be null");
+        }
+        // disallow duplicate key entries in keys array
+        if (keys.indexOf(key) != -1){
+            throw IllegalArgumentException("key already exists in the array");
+        }        
         // Resize arrays if necessary
         if (currentIndex >= keys.size) {
             resizeArrays()
         }
-
         // add new entry
         keys[currentIndex] = key
         if (retentionInMillis == 0) {
@@ -48,19 +59,19 @@ class SimpleAgedKache(val cacheClock: Clock = Clock.systemUTC()) {
         // resize arrays by declaring new array of currentIndex+1 size
         //    copy old array entries into new array and then insert new entry in array
         
-        // include handling for when initial case is 0
+        // handling for initial case when size is 0
         val newSize = if (keys.isEmpty()) 1 else keys.size * 2
         
         val newKeys = arrayOfNulls<String>(newSize)
-            val newValues = arrayOfNulls<Any?>(newSize)
+        val newValues = arrayOfNulls<Any?>(newSize)
 
-            for (i in keys.indices){
-                newKeys[i] = keys[i]
-                newValues[i] = values[i]
-            }
+        for (i in keys.indices){
+            newKeys[i] = keys[i]
+            newValues[i] = values[i]
+        }
 
-            keys = newKeys
-            values = newValues
+        keys = newKeys
+        values = newValues
     }
 
     fun size(): Int {
