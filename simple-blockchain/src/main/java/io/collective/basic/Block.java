@@ -14,7 +14,7 @@ public class Block {
         this.previousHash = previousHash;
         this.timestamp = timestamp;
         this.nonce = nonce;
-        this.hash = null;
+        this.hash = this.calculatedHash(); // new hash is calculated upon instantiation
     }
 
     public String getPreviousHash() {
@@ -34,10 +34,22 @@ public class Block {
     }
 
     public String calculatedHash() throws NoSuchAlgorithmException {
-        return null;
+        //Description:
+        //   a method that calls calculateHash to find the new block hash
+        //   the new block hash is calculated from the previousHash + timestamp + nonce
+        //Parameters:
+        //   N/A
+        //Returns:
+        //   newHash | String | the calculated hash string for the new block
+        String hashString = (previousHash 
+            + Long.toString(timestamp) 
+            + Integer.toString(nonce)
+        );
+        String newHash = calculateHash(hashString);
+        return newHash;
     }
 
-    /// Supporting functions that you'll need.
+    // Supporting functions that you'll need.
 
     static String calculateHash(String string) throws NoSuchAlgorithmException {
         MessageDigest digest = MessageDigest.getInstance("SHA-256");
