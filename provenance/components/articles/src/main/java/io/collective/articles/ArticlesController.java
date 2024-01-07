@@ -56,6 +56,7 @@ public class ArticlesController extends BasicHandler {
                 // send collection of article infos; write the articleInfos to a servlet http response
                 writeResponse(servletResponse, articleInfos);
 
+
             }
 
         });
