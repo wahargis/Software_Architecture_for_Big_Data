@@ -11,7 +11,11 @@ import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class ArticlesController extends BasicHandler {
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
     private final ArticleDataGateway gateway;
     private final ObjectMapper mapper;
 
@@ -76,10 +80,7 @@ public class ArticlesController extends BasicHandler {
             mapper.writeValue(response.getOutputStream(), articleInfos);
         } catch (IOException e) {
             // Log the exception for debugging purposes
-            // log.error("Error writing response: " + e.getMessage(), e);
-            
-            // for the sake of the exercise, we will simply print an error statement to system out
-            System.out.println("An IOException was caught in writeResponse");
+            logger.error("Error writing response: " + e.getMessage(), e);
 
             // Set an appropriate HTTP error status
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
