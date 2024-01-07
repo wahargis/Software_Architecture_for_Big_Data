@@ -3,7 +3,7 @@
 A common architecture used for data collection.
 
 Provenance collects and stores articles from [infoq.com](https://www.infoq.com/) and follows a
-Netflix [Conductor-esque](https://netflix.github.io/conductor/) architecture.
+Netflix [Conductor-esque](https://web.archive.org/web/20230607060656/http://conductor.netflix.com/) architecture.
 
 ### History
 
