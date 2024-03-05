@@ -19,5 +19,9 @@ class ProductService(private val dataGateway: ProductDataGateway) {
 
     fun decrementBy(purchase: PurchaseInfo) {
         // TODO - Implement the function.
+
+        // use the Gateway class' logged decrement function
+        // this decrements the value in the database atomically and within a transaction.
+        dataGateway.fasterDecrementBy(purchase)
     }
 }

@@ -66,4 +66,4 @@ def build_model(results: List[Result]) -> Tuple[DecisionTreeClassifier, OneHotEn
 def train_tree_predictor(results: List[Result]) -> Predictor:
     model, team_encoding = build_model(results)
 
-    return DecisionTreeClassifier(model, team_encoding)
+    return DecisionTreePredictor(model, team_encoding)

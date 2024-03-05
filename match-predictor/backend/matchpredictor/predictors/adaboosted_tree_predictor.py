@@ -58,7 +58,7 @@ def build_model(results: List[Result]) -> Tuple[DecisionTreeClassifier, OneHotEn
     x: NDArray[float64] = np.concatenate([encoded_home_names, encoded_away_names], 1)
     y = np.sign(home_goals - away_goals)
 
-    model = AdaBoostClassifier(DecisionTreeClassifier(max_depth=5)
+    model = AdaBoostClassifier(DecisionTreeClassifier(max_depth=25)
                                , n_estimators=300)
     model.fit(x, y)
 

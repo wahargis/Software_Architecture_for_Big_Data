@@ -57,7 +57,7 @@ def build_model(results: List[Result]) -> Tuple[KernelRidge, OneHotEncoder]:
     x: NDArray[float64] = np.concatenate([encoded_home_names, encoded_away_names], 1)
     y = np.sign(home_goals - away_goals)
 
-    model = KernelRidge(penalty="l2", fit_intercept=False, multi_class="ovr", C=1)
+    model = KernelRidge(kernel='poly', degree=5)
     model.fit(x, y)
 
     return model, team_encoding
